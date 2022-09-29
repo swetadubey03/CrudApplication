@@ -88,8 +88,8 @@ const getUser = asyncHandler(async(req,res) =>{
 
     //Pagination
 
-    
-    const page = req.query.p 
+
+    const page = req.query.p
     const perPage = 5
     const getUsers = await Users.find().skip((page-1) * perPage).limit(perPage)
     res.status(200).json(getUsers)
