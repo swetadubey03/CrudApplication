@@ -85,10 +85,15 @@ const deleteUser = asyncHandler(async(req,res) =>{
 //List Users
 
 const getUser = asyncHandler(async(req,res) =>{
-    const getUsers = await Users.find()
+    //Pagination
 
-    if(getUsers){
-        res.status(200).json(getUsers)
-    }
+    const page = req.query.p || 0
+    const perPage = 5
+    const getUsers = await Users.find().skip((page-1) * perPage).limit(perPage)
+    res.status(200).json(getUsers)
+
+    // if(getUsers){
+    //     res.status(200).json(getUsers)
+    // }
 })
 module.exports = {createUser, updateUser, deleteUser, getUser}
